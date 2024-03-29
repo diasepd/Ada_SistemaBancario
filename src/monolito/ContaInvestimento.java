@@ -1,25 +1,23 @@
 package monolito;
+
 import java.math.BigDecimal;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+//  Rendimento de 1% para PF e 2% para PJ, ao mês - como identificar a classificação do cliente?
+//  Rendimento gerado no início do mês
+public class ContaInvestimento extends ContaImpl {
+    public ContaInvestimento(int id, long idUsuario, String dataAtual) {
+        super(id, idUsuario, dataAtual);
+    }
+    @Override
+    public void sacar(BigDecimal valor) {
 
-public class ContaInvestimento extends ContaCorrente{
-    private int            id;
-    private BigDecimal     saldo;
-    private HistoricoAcoes historicoAcoes;
-    private String         dataDeAtualizacao;
-    private Status         status;
-    private long           idUsuario;
+    }
+    public void depositar(BigDecimal valor) {
 
-    private enum Status {ATIVA(), INATIVA();}
+    }
+    public void transferir() {
 
-    public ContaInvestimento(int id, long idUsuario) {
-        super(id, idUsuario, null);
-        String dataAtual       = new SimpleDateFormat("dd/MM/yyyy").format(new Date());
-        this.id                = id;
-        this.saldo             = new BigDecimal(0);
-        this.dataDeAtualizacao = dataAtual;
-        this.status            = Status.ATIVA;
-        this.idUsuario         = idUsuario;
+    }
+    public void consultarSaldo() {
+
     }
 }

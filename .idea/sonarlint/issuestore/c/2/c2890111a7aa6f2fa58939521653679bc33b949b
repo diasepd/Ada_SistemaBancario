@@ -1,14 +1,9 @@
 
-A
-java:S1068"&Remove this unused "id" private field.(ôç¼Óşÿÿÿÿ
-D
-java:S1068")Remove this unused "saldo" private field.(ÅŞÿøúÿÿÿÿ
-M
-java:S1068	"2Remove this unused "historicoAcoes" private field.(Ñîëüÿÿÿÿ
-K
-java:S1068
-"5Remove this unused "dataDeAtualizacao" private field.(»õåå
-@
-java:S1068"*Remove this unused "status" private field.(¡Ò
-B
-java:S1068"-Remove this unused "idUsuario" private field.(ÕŸ¸
+£
+java:S1186"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(²©Íıüÿÿÿÿ8‚Ÿ¬ìæ1
+£
+java:S1186"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(´¯å‡üÿÿÿÿ8„Ÿ¬ìæ1
+£
+java:S1186"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(éäÑıÿÿÿÿ8„Ÿ¬ìæ1
+£
+java:S1186"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(˜ìÕ¹øÿÿÿÿ8„Ÿ¬ìæ1
