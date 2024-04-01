@@ -1,0 +1,3 @@
+package enumerador;
+
+enum Acao {SAQUE, DEPOSITO, TRANSFERENCIA, INVESTIMENTO, CONSULTA_SALDO}
