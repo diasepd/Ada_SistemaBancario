@@ -1,3 +1,3 @@
 package enumerador;
 
-enum Classificacao {CPF, CNPJ}
+public enum Classificacao {PF, PJ}
