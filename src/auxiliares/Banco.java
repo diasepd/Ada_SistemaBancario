@@ -1,4 +1,5 @@
-package model;
+package auxiliares;
+import model.Usuario;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,12 +8,20 @@ public class Banco {
 
     public Usuario getUsuarioArrayList(String idUsuario) {
         for (Usuario usuario : usuarioArrayList) {
-            if (usuario.getId() == idUsuario) return usuario;
+            if (usuario.getId() == idUsuario)
+                return usuario;
         }
         return null;
     }
 
     public void setUsuarioArrayList(Usuario usuario) {
         usuarioArrayList.add(usuario);
+    }
+
+    @Override
+    public String toString() {
+        return "Banco{" +
+                "usuarioArrayList=" + usuarioArrayList +
+                '}';
     }
 }
