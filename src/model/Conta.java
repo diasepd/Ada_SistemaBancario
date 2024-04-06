@@ -56,10 +56,7 @@ public abstract class Conta {
     public void setTipoPessoa(Classificacao tipoPessoa) {this.tipoPessoa = tipoPessoa;}
 
     public void depositar(double valor, String... historia) {
-        // Creditar
         new Credito().creditar(this, valor);
-
-        // Registrar Ação
         historicoDeAcao.add(new Acao(TipoAcao.DEPOSITO, valor, valor, idUsuario, idUsuario, "Deposito"));
     }
 
@@ -69,11 +66,9 @@ public abstract class Conta {
         if (tipoConta.equals(TipoConta.CORRENTE))
             valor = new Saque().Calcular(valor, getTipoPessoa().getTxSacarTransferir());
 
-        // Debitar
         if (naoDebitou(valor))
             return false;
 
-        // Registrar Ação
         historicoDeAcao.add(new Acao(TipoAcao.SAQUE, valorPretendido, valor, idUsuario, idUsuario, "Saque"));
         return true;
     }
@@ -90,14 +85,12 @@ public abstract class Conta {
             return false;
         new Credito().creditar(contaTerceiro, valor);
 
-        // Registrar Ação
         contaTerceiro.setAcao(new Acao(TipoAcao.TRANSFERENCIA, valor, valorReal, getIdUsuario(), idUsuario, "Crédito"));
         historicoDeAcao.add(new Acao(TipoAcao.TRANSFERENCIA, valor, valorReal, getIdUsuario(), idUsuario, "Débito"));
         return true;
     }
 
     public double consultarSaldo() {
-        // Registrar Ação
         historicoDeAcao.add(new Acao(TipoAcao.CONSULTA_SALDO, saldo, saldo, getIdUsuario(), getIdUsuario(), "Consulta"));
         return saldo;
     }

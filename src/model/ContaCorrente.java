@@ -16,7 +16,6 @@ public class ContaCorrente extends Conta {
         ContaInvestimento contaInvest = getBanco().getUsuario(getIdUsuario()).ChecaContaInvestimento();
         new Credito().creditar(contaInvest, valor);
 
-        // Registrar Ação
         contaInvest.setAcao(new Acao(TipoAcao.INVESTIMENTO, valor, valor, getIdUsuario(), getIdUsuario(), "Crédito"));
         setAcao(new Acao(TipoAcao.INVESTIMENTO, valor, valor, getIdUsuario(), getIdUsuario(), "Débito"));
         return true;

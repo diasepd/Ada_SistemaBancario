@@ -11,10 +11,9 @@ public class ContaInvestimento extends Conta {
     }
 
     public void processarRendimento() {
-        double taxa = getBanco().getUsuario(getIdUsuario()).getClassificacao().getTxRendimentoMensal();
-        double renda = new Rendimento().Calcular(getSaldo(), taxa);
+        double renda = new Rendimento().Calcular(getSaldo(), getTipoPessoa().getTxRendimentoMensal());
         new Credito().creditar(this, renda);
         getHistoricoDeAcao().add(new Acao(TipoAcao.DEPOSITO, renda, renda, getIdUsuario(), getIdUsuario(), "Renda"));
     }
 }
-//      ● O rendimento é gerado no início de cada mês
+// O rendimento é gerado no início de cada mês

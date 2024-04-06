@@ -15,7 +15,7 @@ public enum Classificacao {
     public double getTxRendimentoMensal() {
         return txRendimentoMensal;
     }
-    public double getTxSacarTransferir() {return txSacarTransferir;}
+    public double getTxSacarTransferir() { return txSacarTransferir; }
 
     @Override
     public String toString() {
