@@ -6,7 +6,7 @@ import java.util.List;
 public class Banco {
     private List<Usuario> usuarioArrayList = new ArrayList<>();
 
-    public Usuario getUsuarioArrayList(String idUsuario) {
+    public Usuario getUsuario(String idUsuario) {
         for (Usuario usuario : usuarioArrayList) {
             if (usuario.getId() == idUsuario)
                 return usuario;
@@ -14,7 +14,7 @@ public class Banco {
         return null;
     }
 
-    public void setUsuarioArrayList(Usuario usuario) {
+    public void setUsuario(Usuario usuario) {
         usuarioArrayList.add(usuario);
     }
 

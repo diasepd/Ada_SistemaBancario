@@ -70,7 +70,7 @@ public abstract class Conta {
         if (ehContaCorrentePJ())
             valor *= 1.005;
 
-        Usuario usuario = getBanco().getUsuarioArrayList(idUsuario);
+        Usuario usuario = getBanco().getUsuario(idUsuario);
         if (usuario.equals(null) || naoDebitou(valor))
             return false;
         new Credito().creditar(usuario.getContaCorrente(), valorPretendido);
@@ -91,7 +91,7 @@ public abstract class Conta {
 
     private boolean ehContaCorrentePJ () {
         return tipo.equals(Tipo.CORRENTE) &&
-                getBanco().getUsuarioArrayList(getIdUsuario()).getClassificacao().equals(Classificacao.PJ);
+                getBanco().getUsuario(getIdUsuario()).getClassificacao().equals(Classificacao.PJ);
     }
 
     boolean naoDebitou(double valor) {

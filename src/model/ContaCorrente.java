@@ -2,7 +2,6 @@ package model;
 import auxiliares.Banco;
 import auxiliares.Credito;
 import enumerador.Acao;
-import enumerador.Classificacao;
 import enumerador.Tipo;
 
 public class ContaCorrente extends Conta {
@@ -15,7 +14,7 @@ public class ContaCorrente extends Conta {
         if (naoDebitou(valor))
             return false;
 
-        Usuario usuario = getBanco().getUsuarioArrayList(getIdUsuario());
+        Usuario usuario = getBanco().getUsuario(getIdUsuario());
         if (usuario.getContaInvestimento() == null)
             usuario.setContaInvestimento(new ContaInvestimento(2, getIdUsuario(), getBanco()));
 

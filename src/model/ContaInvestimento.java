@@ -12,7 +12,7 @@ public class ContaInvestimento extends Conta {
     }
 
     public void processarRendimento() {
-        double taxa = getBanco().getUsuarioArrayList(getIdUsuario()).getClassificacao().getTaxaRendimentoMensal();
+        double taxa = getBanco().getUsuario(getIdUsuario()).getClassificacao().getTaxaRendimentoMensal();
         double renda = new Rendimento().Calcular(getSaldo(), taxa);
         new Credito().creditar(this, renda);
         getHistoricoAcao().add(new HistoricoAcao(Acao.DEPOSITO, renda, renda, getIdUsuario(), getIdUsuario(), "Renda"));
