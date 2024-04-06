@@ -2,10 +2,13 @@ package model;
 import auxiliares.Banco;
 import auxiliares.Credito;
 import enumerador.Acao;
+import enumerador.Classificacao;
+import enumerador.Tipo;
 
 public class ContaCorrente extends Conta {
-    public ContaCorrente(long id, String idUsuario, Banco banco){
+    public ContaCorrente(long id, String idUsuario, Banco banco) {
         super(id, idUsuario, banco);
+        setTipo(Tipo.CORRENTE);
     }
 
     public boolean investir(double valor) {

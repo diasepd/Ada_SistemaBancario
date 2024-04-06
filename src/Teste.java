@@ -11,8 +11,7 @@ public class Teste {
         banco.setUsuarioArrayList(usuario2);
         usuario1.setContaPoupanca(new ContaPoupanca(3, "12345678911", banco)); //Conta poupança PF
 
-        System.out.println();
-        System.out.println("Saldo após DEPOSITO e INVESTIMENTO");
+        System.out.println("\nSaldo após DEPOSITO e INVESTIMENTO");
         usuario1.getContaCorrente().depositar(200); //100
         usuario2.getContaCorrente().depositar(200); //100
         usuario1.getContaPoupanca().depositar(100); //100
@@ -36,24 +35,24 @@ public class Teste {
         usuario2.getContaInvestimento().transferir(10, "12345678911");     //80
         saldos(usuario1, usuario2);
 
-        System.out.println("Consulta saldo");
+        System.out.println("Consulta saldo\n");
         usuario1.getContaCorrente().consultarSaldo();     //82
         usuario2.getContaCorrente().consultarSaldo();     //109
         usuario1.getContaPoupanca().consultarSaldo();     //80
         usuario1.getContaInvestimento().consultarSaldo(); //80
         usuario2.getContaInvestimento().consultarSaldo(); //79
 
-        System.out.println("Rendimento)");
-        usuario1.getContaInvestimento().rendimento(); //100
-        usuario2.getContaInvestimento().rendimento(); //100
+        System.out.println("Saldo após Rendimento");
+        usuario1.getContaInvestimento().processarRendimento(); //100
+        usuario2.getContaInvestimento().processarRendimento(); //100
         saldos(usuario1, usuario2);
 
-        System.out.println("Historico das Movimentações");
-        historiar(usuario1.getContaCorrente());
-        historiar(usuario2.getContaCorrente());
-        historiar(usuario1.getContaPoupanca());
-        historiar(usuario1.getContaInvestimento());
-        historiar(usuario2.getContaInvestimento());
+//        System.out.println("Historico das Movimentações");
+//        historiar(usuario1.getContaCorrente());
+//        historiar(usuario2.getContaCorrente());
+//        historiar(usuario1.getContaPoupanca());
+//        historiar(usuario1.getContaInvestimento());
+//        historiar(usuario2.getContaInvestimento());
     }
 
     private static void historiar (Conta conta) {

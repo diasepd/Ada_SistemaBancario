@@ -5,6 +5,8 @@ import auxiliares.Debito;
 import enumerador.Acao;
 import enumerador.Classificacao;
 import enumerador.Status;
+import enumerador.Tipo;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -17,6 +19,7 @@ public abstract class Conta {
     private Status status = Status.ATIVO;
     private String idUsuario;
     private Banco banco;
+    private Tipo tipo;
 
     public Conta(long id, String idUsuario, Banco banco) {
         this.id = id;
@@ -40,6 +43,8 @@ public abstract class Conta {
     public void setIdUsuario(String idUsuario){this.idUsuario = idUsuario;}
     public Banco getBanco() {return banco;}
     public void setBanco(Banco banco) {this.banco = banco;}
+    public Tipo getTipo() {return tipo;}
+    public void setTipo(Tipo tipo) {this.tipo = tipo;}
 
     public void depositar(double valor, String... historia) {
         new Credito().creditar(this, valor);
@@ -85,7 +90,7 @@ public abstract class Conta {
     }
 
     private boolean ehContaCorrentePJ () {
-        return this.getClass().getCanonicalName().equals("model.ContaCorrente") &&
+        return tipo.equals(Tipo.CORRENTE) &&
                 getBanco().getUsuarioArrayList(getIdUsuario()).getClassificacao().equals(Classificacao.PJ);
     }
 
