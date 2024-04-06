@@ -60,32 +60,28 @@ public abstract class Conta {
         historicoDeAcao.add(new Acao(TipoAcao.DEPOSITO, valor, valor, idUsuario, idUsuario, "Deposito"));
     }
 
-    public boolean sacar(double valor, String... historia) {
-        // Ajustar valor
-        double valorPretendido = valor;
-        if (tipoConta.equals(TipoConta.CORRENTE))
-            valor = new Saque().Calcular(valor, getTipoPessoa().getTxSacarTransferir());
+    public boolean sacar(double valorReal, String... historia) {
+        double valor = valorReal;
+        valorReal = calcularValorReal(valorReal);
 
-        if (naoDebitou(valor))
+        if (naoDebitou(valorReal))
             return false;
 
-        historicoDeAcao.add(new Acao(TipoAcao.SAQUE, valorPretendido, valor, idUsuario, idUsuario, "Saque"));
+        historicoDeAcao.add(new Acao(TipoAcao.SAQUE, valor, valorReal, idUsuario, idUsuario, "Saque"));
         return true;
     }
 
     public boolean transferir(double valorReal, String idUsuario) {
-        // Ajustar valor
         double valor = valorReal;
-        if (tipoConta.equals(TipoConta.CORRENTE))
-            valorReal = new Saque().Calcular(valorReal, getTipoPessoa().getTxSacarTransferir());
+        valorReal = calcularValorReal(valorReal);
 
         // Debitar e Creditar
-        ContaCorrente contaTerceiro = getBanco().getUsuario(idUsuario).getContaCorrente();
-        if (contaTerceiro.equals(null) || naoDebitou(valorReal))
+        ContaCorrente conta = getBanco().getUsuario(idUsuario).getContaCorrente();
+        if (conta.equals(null) || naoDebitou(valorReal))
             return false;
-        new Credito().creditar(contaTerceiro, valor);
+        new Credito().creditar(conta, valor);
 
-        contaTerceiro.setAcao(new Acao(TipoAcao.TRANSFERENCIA, valor, valorReal, getIdUsuario(), idUsuario, "Crédito"));
+        conta.setAcao(new Acao(TipoAcao.TRANSFERENCIA, valor, valorReal, getIdUsuario(), idUsuario, "Crédito"));
         historicoDeAcao.add(new Acao(TipoAcao.TRANSFERENCIA, valor, valorReal, getIdUsuario(), idUsuario, "Débito"));
         return true;
     }
@@ -97,5 +93,10 @@ public abstract class Conta {
 
     boolean naoDebitou(double valor) {
         return !new Debito().debitar(this, valor);
+    }
+
+    private double calcularValorReal(double valorReal) {
+        return tipoConta.equals(TipoConta.CORRENTE) ?
+                new Saque().Calcular(valorReal, getTipoPessoa().getTxSacarTransferir()) : valorReal;
     }
 }

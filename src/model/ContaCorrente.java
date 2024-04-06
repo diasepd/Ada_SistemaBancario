@@ -9,15 +9,15 @@ public class ContaCorrente extends Conta {
         setTipo(TipoConta.CORRENTE);
     }
 
-    public boolean investir(double valor) {
+    public boolean investir(double valorReal) {
         // Debitar e Creditar
-        if (naoDebitou(valor))
+        ContaInvestimento conta = getBanco().getUsuario(getIdUsuario()).ChecaContaInvestimento();
+        if (conta.equals(null) || naoDebitou(valorReal))
             return false;
-        ContaInvestimento contaInvest = getBanco().getUsuario(getIdUsuario()).ChecaContaInvestimento();
-        new Credito().creditar(contaInvest, valor);
+        new Credito().creditar(conta, valorReal);
 
-        contaInvest.setAcao(new Acao(TipoAcao.INVESTIMENTO, valor, valor, getIdUsuario(), getIdUsuario(), "Crédito"));
-        setAcao(new Acao(TipoAcao.INVESTIMENTO, valor, valor, getIdUsuario(), getIdUsuario(), "Débito"));
+        conta.setAcao(new Acao(TipoAcao.INVESTIMENTO, valorReal, valorReal, getIdUsuario(), getIdUsuario(), "Crédito"));
+        setAcao(new Acao(TipoAcao.INVESTIMENTO, valorReal, valorReal, getIdUsuario(), getIdUsuario(), "Débito"));
         return true;
     }
 }
