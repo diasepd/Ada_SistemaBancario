@@ -1,7 +1,5 @@
 package enumerador;
 
-import model.Usuario;
-
 public enum Classificacao {
     PF(0.01),
     PJ(0.02);
@@ -12,7 +10,7 @@ public enum Classificacao {
         this.taxaRendimentoMensal = taxa;
     }
 
-    public double getTaxaRendimentoMensal() {
+    public double getTxRendimentoMensal() {
         return taxaRendimentoMensal;
     }
 }

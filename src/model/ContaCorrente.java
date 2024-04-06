@@ -1,13 +1,13 @@
 package model;
 import auxiliares.Banco;
 import auxiliares.Credito;
-import enumerador.Acao;
-import enumerador.Tipo;
+import enumerador.TipoConta;
+import enumerador.TipoAcao;
 
 public class ContaCorrente extends Conta {
     public ContaCorrente(long id, String idUsuario, Banco banco) {
         super(id, idUsuario, banco);
-        setTipo(Tipo.CORRENTE);
+        setTipo(TipoConta.CORRENTE);
     }
 
     public boolean investir(double valor) {
@@ -20,10 +20,10 @@ public class ContaCorrente extends Conta {
 
         new Credito().creditar(usuario.getContaInvestimento(), valor);
 
-        setHistoricoAcao(
-                new HistoricoAcao(Acao.INVESTIMENTO, valor, valor, getIdUsuario(), getIdUsuario(), "Débito"));
-        usuario.getContaInvestimento().setHistoricoAcao(
-                new HistoricoAcao(Acao.INVESTIMENTO, valor, valor, getIdUsuario(), getIdUsuario(), "Crédito"));
+        setAcao(
+                new Acao(TipoAcao.INVESTIMENTO, valor, valor, getIdUsuario(), getIdUsuario(), "Débito"));
+        usuario.getContaInvestimento().setAcao(
+                new Acao(TipoAcao.INVESTIMENTO, valor, valor, getIdUsuario(), getIdUsuario(), "Crédito"));
         return true;
     }
 }

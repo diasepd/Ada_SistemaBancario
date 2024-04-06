@@ -47,17 +47,17 @@ public class Teste {
         usuario2.getContaInvestimento().processarRendimento(); //100
         saldos(usuario1, usuario2);
 
-//        System.out.println("Historico das Movimentações");
-//        historiar(usuario1.getContaCorrente());
-//        historiar(usuario2.getContaCorrente());
-//        historiar(usuario1.getContaPoupanca());
-//        historiar(usuario1.getContaInvestimento());
-//        historiar(usuario2.getContaInvestimento());
+        System.out.println("Historico das Movimentações");
+        historiar(usuario1.getContaCorrente());
+        historiar(usuario2.getContaCorrente());
+        historiar(usuario1.getContaPoupanca());
+        historiar(usuario1.getContaInvestimento());
+        historiar(usuario2.getContaInvestimento());
     }
 
     private static void historiar (Conta conta) {
-        for (HistoricoAcao historicoAcao: conta.getHistoricoAcao()) {
-            System.out.println(historicoAcao.toString());
+        for (Acao acao : conta.getHistoricoDeAcoes()) {
+            System.out.println(acao.toString());
         }
         System.out.println();
     }

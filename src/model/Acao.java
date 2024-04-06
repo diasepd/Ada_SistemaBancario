@@ -1,18 +1,18 @@
 package model;
-import enumerador.Acao;
+import enumerador.TipoAcao;
 import java.util.Date;
 
-public class HistoricoAcao {
+public class Acao {
     private Date data;
-    private Acao tipo;
+    private TipoAcao tipo;
     private double valorPretendido;
     private double valorReal;
     private String idUsuarioOrigem;
     private String idUsuarioDestino;
     private String observacao;
 
-    public HistoricoAcao(Acao tipo, double valorPretendido, double valorReal, String idUsuarioOrigem,
-                         String idUsuarioDestino, String observacao) {
+    public Acao(TipoAcao tipo, double valorPretendido, double valorReal, String idUsuarioOrigem,
+                String idUsuarioDestino, String observacao) {
         this.data = new Date();
         this.tipo = tipo;
         this.valorPretendido = valorPretendido;
@@ -23,7 +23,7 @@ public class HistoricoAcao {
     }
 
     public Date getData() {return data;}
-    public Acao getTipo() {return tipo;}
+    public TipoAcao getTipo() {return tipo;}
     public double getValorPretendido() {return valorPretendido;}
     public double getValorReal() {return valorReal;}
     public String getIdUsuarioOrigem() {return idUsuarioOrigem;}

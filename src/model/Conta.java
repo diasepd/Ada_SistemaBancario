@@ -2,10 +2,10 @@ package model;
 import auxiliares.Banco;
 import auxiliares.Credito;
 import auxiliares.Debito;
-import enumerador.Acao;
 import enumerador.Classificacao;
 import enumerador.Status;
-import enumerador.Tipo;
+import enumerador.TipoConta;
+import enumerador.TipoAcao;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -14,27 +14,28 @@ import java.util.List;
 public abstract class Conta {
     private long id;
     private double saldo = 0;
-    private List<HistoricoAcao> historicoAcao = new ArrayList<>();
+    private List<Acao> historicoDeAcoes = new ArrayList<>();
     private Date dataDeAtualizacao;
     private Status status = Status.ATIVO;
     private String idUsuario;
     private Banco banco;
-    private Tipo tipo;
+    private TipoConta tipoConta;
 
     public Conta(long id, String idUsuario, Banco banco) {
         this.id = id;
         this.idUsuario = idUsuario;
         this.banco = banco;
         this.dataDeAtualizacao = new Date();
-        setHistoricoAcao(new HistoricoAcao(Acao.DEPOSITO, 0, 0, idUsuario, idUsuario, "Abertura da Conta"));
+        setAcao(new Acao(TipoAcao.DEPOSITO, 0, 0, idUsuario, idUsuario, "Abertura da Conta"));
     }
 
+    public void setAcao(Acao acao){this.historicoDeAcoes.add(acao);}
     public long getId(){return id;}
     public void setId(long id){this.id = id;}
     public double getSaldo(){return saldo;}
     public void setSaldo(double saldo){this.saldo   = saldo;}
-    public List<HistoricoAcao> getHistoricoAcao(){return historicoAcao;}
-    public void setHistoricoAcao(HistoricoAcao historicoAcao){this.historicoAcao.add(historicoAcao);}
+    public List<Acao> getHistoricoDeAcoes(){return historicoDeAcoes;}
+    public void setHistoricoDeAcoes(List<Acao> historicoDeAcoes) {this.historicoDeAcoes = historicoDeAcoes;}
     public Date getDataDeAtualizacao(){return dataDeAtualizacao;}
     public void setDataDeAtualizacao(Date dataDeAtualizacao){this.dataDeAtualizacao = dataDeAtualizacao;}
     public Status getStatus(){return status;}
@@ -43,13 +44,13 @@ public abstract class Conta {
     public void setIdUsuario(String idUsuario){this.idUsuario = idUsuario;}
     public Banco getBanco() {return banco;}
     public void setBanco(Banco banco) {this.banco = banco;}
-    public Tipo getTipo() {return tipo;}
-    public void setTipo(Tipo tipo) {this.tipo = tipo;}
+    public TipoConta getTipo() {return tipoConta;}
+    public void setTipo(TipoConta tipoConta) {this.tipoConta = tipoConta;}
 
     public void depositar(double valor, String... historia) {
         new Credito().creditar(this, valor);
 
-        historicoAcao.add(new HistoricoAcao(Acao.DEPOSITO, valor, valor, getIdUsuario(), getIdUsuario(), "Deposito"));
+        historicoDeAcoes.add(new Acao(TipoAcao.DEPOSITO, valor, valor, getIdUsuario(), getIdUsuario(), "Deposito"));
     }
 
     public boolean sacar(double valor, String... historia) {
@@ -60,8 +61,8 @@ public abstract class Conta {
         if (naoDebitou(valor))
             return false;
 
-        getHistoricoAcao().add(
-                new HistoricoAcao(Acao.SAQUE, valorPretendido, valor, getIdUsuario(), getIdUsuario(), "Saque"));
+        getHistoricoDeAcoes().add(
+                new Acao(TipoAcao.SAQUE, valorPretendido, valor, getIdUsuario(), getIdUsuario(), "Saque"));
         return true;
     }
 
@@ -75,22 +76,22 @@ public abstract class Conta {
             return false;
         new Credito().creditar(usuario.getContaCorrente(), valorPretendido);
 
-        getHistoricoAcao().add(new
-                HistoricoAcao(Acao.TRANSFERENCIA, valorPretendido, valor, getIdUsuario(), idUsuario, "Débito"));
-        usuario.getContaCorrente().setHistoricoAcao(new
-                HistoricoAcao(Acao.TRANSFERENCIA, valorPretendido, valor, getIdUsuario(), idUsuario, "Crédito"));
+        getHistoricoDeAcoes().add(new
+                Acao(TipoAcao.TRANSFERENCIA, valorPretendido, valor, getIdUsuario(), idUsuario, "Débito"));
+        usuario.getContaCorrente().setAcao(new
+                Acao(TipoAcao.TRANSFERENCIA, valorPretendido, valor, getIdUsuario(), idUsuario, "Crédito"));
         return true;
     }
 
     public double consultarSaldo () {
         double saldo = getSaldo();
-        getHistoricoAcao().add(new
-                HistoricoAcao(Acao.CONSULTA_SALDO, saldo, saldo, getIdUsuario(), getIdUsuario(), "Consulta"));
+        getHistoricoDeAcoes().add(new
+                Acao(TipoAcao.CONSULTA_SALDO, saldo, saldo, getIdUsuario(), getIdUsuario(), "Consulta"));
         return saldo;
     }
 
     private boolean ehContaCorrentePJ () {
-        return tipo.equals(Tipo.CORRENTE) &&
+        return tipoConta.equals(TipoConta.CORRENTE) &&
                 getBanco().getUsuario(getIdUsuario()).getClassificacao().equals(Classificacao.PJ);
     }
 
