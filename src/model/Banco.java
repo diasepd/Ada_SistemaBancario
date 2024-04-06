@@ -1,27 +1,25 @@
-package auxiliares;
-import model.Usuario;
+package model;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Banco {
-    private List<Usuario> usuarioArrayList = new ArrayList<>();
+    private List<Usuario> listaDeUsuario = new ArrayList<>();
 
     public Usuario getUsuario(String idUsuario) {
-        for (Usuario usuario : usuarioArrayList) {
+        for (Usuario usuario : listaDeUsuario) {
             if (usuario.getId() == idUsuario)
                 return usuario;
         }
         return null;
     }
-
     public void setUsuario(Usuario usuario) {
-        usuarioArrayList.add(usuario);
+        listaDeUsuario.add(usuario);
     }
 
     @Override
     public String toString() {
         return "Banco{" +
-                "usuarioArrayList=" + usuarioArrayList +
+                "usuarioArrayList=" + listaDeUsuario +
                 '}';
     }
 }

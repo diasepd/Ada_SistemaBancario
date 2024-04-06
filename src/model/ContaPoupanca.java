@@ -1,5 +1,4 @@
 package model;
-import auxiliares.Banco;
 import enumerador.TipoConta;
 
 public class ContaPoupanca extends Conta {

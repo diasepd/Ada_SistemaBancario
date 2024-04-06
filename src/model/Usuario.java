@@ -1,5 +1,4 @@
 package model;
-import auxiliares.Banco;
 import enumerador.Classificacao;
 import enumerador.Status;
 import java.util.Date;
@@ -39,6 +38,11 @@ public abstract class Usuario {
     public void setContaCorrente(ContaCorrente contaCorrente) {this.contaCorrente = contaCorrente;}
     public ContaInvestimento getContaInvestimento() {return contaInvestimento;}
     public void setContaInvestimento(ContaInvestimento contaInvestimento) {this.contaInvestimento = contaInvestimento;}
+    ContaInvestimento ChecaContaInvestimento() {
+        if (contaInvestimento == null)
+            contaInvestimento = new ContaInvestimento(2, id, banco);
+        return getContaInvestimento();
+    }
 
     @Override
     public String toString() {

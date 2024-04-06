@@ -1,5 +1,4 @@
 package model;
-import auxiliares.Banco;
 import enumerador.Classificacao;
 
 public class UsuarioPJ extends Usuario {

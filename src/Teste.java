@@ -1,4 +1,4 @@
-import auxiliares.Banco;
+import model.Banco;
 import model.*;
 
 public class Teste {
@@ -56,7 +56,7 @@ public class Teste {
     }
 
     private static void historiar (Conta conta) {
-        for (Acao acao : conta.getHistoricoDeAcoes()) {
+        for (Acao acao : conta.getHistoricoDeAcao()) {
             System.out.println(acao.toString());
         }
         System.out.println();
