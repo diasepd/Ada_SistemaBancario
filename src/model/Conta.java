@@ -1,7 +1,7 @@
 package model;
 import auxiliares.Credito;
 import auxiliares.Debito;
-import auxiliares.Saque;
+import auxiliares.Retirada;
 import enumerador.Classificacao;
 import enumerador.Status;
 import enumerador.TipoConta;
@@ -81,7 +81,7 @@ public abstract class Conta {
 
     private double calcularValorReal(double valor) {
         return tipoConta.equals(TipoConta.CORRENTE) ?
-                new Saque().Calcular(valor, getTipoPessoa().getTxSacarTransferir()) : valor;
+                new Retirada().Calcular(valor, getTipoPessoa().getTxSacarTransferir()) : valor;
     }
 
     boolean debitou(double valor) { return new Debito().debitar(this, valor); }
