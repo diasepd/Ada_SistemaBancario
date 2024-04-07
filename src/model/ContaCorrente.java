@@ -1,5 +1,4 @@
 package model;
-import auxiliares.Credito;
 import enumerador.TipoConta;
 import enumerador.TipoAcao;
 
@@ -9,15 +8,11 @@ public class ContaCorrente extends Conta {
         setTipo(TipoConta.CORRENTE);
     }
 
-    public boolean investir(double valorReal) {
-        // Debitar e Creditar
+    public void investir(double valorReal) {
         ContaInvestimento conta = getBanco().getUsuario(getIdUsuario()).ChecaContaInvestimento();
-        if (conta.equals(null) || naoDebitou(valorReal))
-            return false;
-        new Credito().creditar(conta, valorReal);
-
-        conta.setAcao(new Acao(TipoAcao.INVESTIMENTO, valorReal, valorReal, getIdUsuario(), getIdUsuario(), "Crédito"));
-        setAcao(new Acao(TipoAcao.INVESTIMENTO, valorReal, valorReal, getIdUsuario(), getIdUsuario(), "Débito"));
-        return true;
+        if (movimentacao(conta, valorReal, valorReal)) {
+            conta.setAcao(new Acao(TipoAcao.INVESTIMENTO, valorReal, valorReal, getIdUsuario(), getIdUsuario(), "Crédito"));
+            setAcao(new Acao(TipoAcao.INVESTIMENTO, valorReal, valorReal, getIdUsuario(), getIdUsuario(), "Débito"));
+        }
     }
 }

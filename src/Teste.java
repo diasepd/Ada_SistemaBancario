@@ -11,11 +11,11 @@ public class Teste {
         usuario1.setContaPoupanca(new ContaPoupanca(3, "12345678911", banco));                  //Conta poupança PF
 
         System.out.println("\nSaldo após DEPOSITO e INVESTIMENTO");
-        usuario1.getContaCorrente().depositar(200);                          //100
-        usuario2.getContaCorrente().depositar(200);                          //100
+        usuario1.getContaCorrente().depositar(10100);                          //100
+        usuario2.getContaCorrente().depositar(10100);                          //100
         usuario1.getContaPoupanca().depositar(100);                          //100
-        usuario1.getContaCorrente().investir(100);                           //100
-        usuario2.getContaCorrente().investir(100);                           //100
+        usuario1.getContaCorrente().investir(10000);                           //100
+        usuario2.getContaCorrente().investir(10000);                           //100
         saldos(usuario1, usuario2);
 
         System.out.println("Saldo após SAQUE");
