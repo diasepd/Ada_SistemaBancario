@@ -12,12 +12,12 @@ import java.util.List;
 
 public abstract class Conta {
     private long id;
-    private double saldo = 0;
-    private List<Acao> historicoDeAcao = new ArrayList<>();
-    private Date dataDeAtualizacao;
-    private Status status = Status.ATIVO;
     private String idUsuario;
     private Banco banco;
+    private Date dataDeAtualizacao;
+    private double saldo = 0;
+    private List<Acao> historicoDeAcao = new ArrayList<>();
+    private Status status = Status.ATIVO;
     private TipoConta tipoConta;
     private Classificacao tipoPessoa;
 
@@ -44,23 +44,25 @@ public abstract class Conta {
     public void setIdUsuario(String idUsuario){this.idUsuario = idUsuario;}
     public Banco getBanco() {return banco;}
     public void setBanco(Banco banco) {this.banco = banco;}
-    public TipoConta getTipo() {return tipoConta;}
-    public void setTipo(TipoConta tipoConta) {this.tipoConta = tipoConta;}
     public TipoConta getTipoConta() {return tipoConta;}
     public void setTipoConta(TipoConta tipoConta) {this.tipoConta = tipoConta;}
     public Classificacao getTipoPessoa() {
-        if (tipoPessoa == null)
-            tipoPessoa = banco.getUsuario(getIdUsuario()).getClassificacao();
+        if (tipoPessoa == null) setTipoPessoa(banco.getUsuario(getIdUsuario()).getClassificacao());
         return tipoPessoa;
     }
     public void setTipoPessoa(Classificacao tipoPessoa) {this.tipoPessoa = tipoPessoa;}
 
-    public void depositar(double valor, String... historia) {
+    public double consultarSaldo() {
+        historicoDeAcao.add(new Acao(TipoAcao.CONSULTA_SALDO, saldo, saldo, getIdUsuario(), getIdUsuario(), "Consulta"));
+        return saldo;
+    }
+
+    public void depositar(double valor) {
         new Credito().creditar(this, valor);
         historicoDeAcao.add(new Acao(TipoAcao.DEPOSITO, valor, valor, idUsuario, idUsuario, "Deposito"));
     }
 
-    public void sacar(double valorReal, String... historia) {
+    public void sacar(double valorReal) {
         double valor = valorReal;
         valorReal = calcularValorReal(valorReal);
         if (debitou(valorReal))
@@ -77,22 +79,17 @@ public abstract class Conta {
         }
     }
 
-    public double consultarSaldo() {
-        historicoDeAcao.add(new Acao(TipoAcao.CONSULTA_SALDO, saldo, saldo, getIdUsuario(), getIdUsuario(), "Consulta"));
-        return saldo;
-    }
-
-    <T extends Conta> boolean movimentacao(T conta, double valor, double valorReal) {
-        if (conta.equals(null) || !debitou(valorReal))
-            return false;
-        new Credito().creditar(conta, valor);
-        return true;
+    private double calcularValorReal(double valor) {
+        return tipoConta.equals(TipoConta.CORRENTE) ?
+                new Saque().Calcular(valor, getTipoPessoa().getTxSacarTransferir()) : valor;
     }
 
     boolean debitou(double valor) { return new Debito().debitar(this, valor); }
 
-    private double calcularValorReal(double valor) {
-        return tipoConta.equals(TipoConta.CORRENTE)? new Saque().Calcular(valor, getTipoPessoa().getTxSacarTransferir())
-                : valor;
+    boolean movimentacao(Conta conta, double valor, double valorReal) {
+        if (conta.equals(null) || !debitou(valorReal))
+            return false;
+        new Credito().creditar(conta, valor);
+        return true;
     }
 }

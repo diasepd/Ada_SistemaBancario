@@ -5,7 +5,7 @@ import enumerador.TipoAcao;
 public class ContaCorrente extends Conta {
     public ContaCorrente(long id, String idUsuario, Banco banco) {
         super(id, idUsuario, banco);
-        setTipo(TipoConta.CORRENTE);
+        setTipoConta(TipoConta.CORRENTE);
     }
 
     public void investir(double valorReal) {

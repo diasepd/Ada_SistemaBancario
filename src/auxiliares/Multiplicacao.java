@@ -1,5 +1,5 @@
 package auxiliares;
 
 public abstract class Multiplicacao {
-    public double Calcular(double valor, double tx) { return valor * tx; }
+    public double Calcular(double valor1, double valor2) { return valor1 * valor2; }
 }

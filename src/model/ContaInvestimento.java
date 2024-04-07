@@ -7,7 +7,7 @@ import enumerador.TipoAcao;
 public class ContaInvestimento extends Conta {
     public ContaInvestimento(long id, String idUsuario, Banco banco) {
         super(id, idUsuario, banco);
-        setTipo(TipoConta.INVESTIMENTO);
+        setTipoConta(TipoConta.INVESTIMENTO);
     }
 
     public void processarRendimento() {
@@ -15,5 +15,4 @@ public class ContaInvestimento extends Conta {
         new Credito().creditar(this, renda);
         getHistoricoDeAcao().add(new Acao(TipoAcao.DEPOSITO, renda, renda, getIdUsuario(), getIdUsuario(), "Renda"));
     }
-}
-// O rendimento é gerado no início de cada mês
+} // O rendimento é gerado no início de cada mês
