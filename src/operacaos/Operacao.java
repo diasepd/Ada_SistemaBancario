@@ -1,8 +1,12 @@
 package operacaos;
+import models.Acao;
 import models.Conta;
 
-public abstract class Operacao {
-    double resultado = 0;
+import java.util.List;
 
-    public abstract double realizar(double valor, Conta... conta);
+public abstract class Operacao {
+    List<Acao> historicoAcao;
+    String idUsuario;
+
+    public abstract void realizar(double valor, Conta... conta);
 }

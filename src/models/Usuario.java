@@ -38,7 +38,7 @@ public abstract class Usuario {
     public void setContaCorrente(ContaCorrente contaCorrente) {this.contaCorrente = contaCorrente;}
     public ContaInvestimento getContaInvestimento() {return contaInvestimento;}
     public void setContaInvestimento(ContaInvestimento contaInvestimento) {this.contaInvestimento = contaInvestimento;}
-    ContaInvestimento ChecaContaInvestimento() {
+    public ContaInvestimento ChecaContaInvestimento() {
         if (contaInvestimento == null) setContaInvestimento(new ContaInvestimento(2, id, banco));
         return getContaInvestimento();
     }

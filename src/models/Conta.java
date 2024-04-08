@@ -52,47 +52,30 @@ public abstract class Conta {
     }
     public void setTipoPessoa(Classificacao tipoPessoa) {this.tipoPessoa = tipoPessoa;}
 
-    public void consultarSaldo() {
-        TipoAcao acao = TipoAcao.CONSULTA_SALDO;
-        acao.efetuar(0, this);
-    }
-
-    public void depositar(double valor) {
-//        TipoAcao acao = TipoAcao.DEPOSITO;
-//        acao.efetuar(banco, idUsuario, valor, "");
-        new Credito().creditar(this, valor);
-        historicoDeAcao.add(new Acao(TipoAcao.DEPOSITO, valor, valor, idUsuario, idUsuario, "Deposito"));
-    }
-
-    public void sacar(double valorReal) {
-//        TipoAcao acao = TipoAcao.SAQUE;
-//        acao.efetuar(banco, idUsuario, valorReal, "");
-        double valor = valorReal;
-        valorReal = calcularValorReal(valorReal);
-        if (debitou(valorReal))
-            historicoDeAcao.add(new Acao(TipoAcao.SAQUE, valor, valorReal, idUsuario, idUsuario, "Saque"));
-    }
-
-    public void transferir(double valorReal, String idDestino) {
-//        TipoAcao acao = TipoAcao.TRANSFERENCIA;
-//        acao.efetuar(banco, idUsuario, valorReal, idDestino);
-        double valor = valorReal;
-        valorReal = calcularValorReal(valorReal);
+    public void consultarSaldo() {efetuar(TipoAcao.CONSULTA_SALDO, saldo);}
+    public void depositar(double valor) {efetuar(TipoAcao.DEPOSITO, valor);}
+    public void sacar(double valor) {efetuar(TipoAcao.SAQUE, valor);}
+    private void efetuar (TipoAcao acao, double valor) {acao.efetuar(valor, this);}
+    public void transferir(double valor, String idDestino) {
         ContaCorrente conta = getBanco().getUsuario(idDestino).getContaCorrente();
-        if (movimentacao(conta, valor, valorReal)) {
-            conta.setAcao(new Acao(TipoAcao.TRANSFERENCIA, valor, valorReal, idUsuario, idDestino, "Crédito"));
-            historicoDeAcao.add(new Acao(TipoAcao.TRANSFERENCIA, valor, valorReal, idUsuario, idDestino, "Débito"));
+        double valorSolicitado = valor;
+        valor = calcularValor(valor);
+        if (movimentacao(conta, valorSolicitado, valor)) {
+            conta.setAcao(new Acao(TipoAcao.TRANSFERENCIA, valorSolicitado, valor, idUsuario, idDestino, "Crédito"));
+            historicoDeAcao.add(new Acao(TipoAcao.TRANSFERENCIA, valorSolicitado, valor, idUsuario, idDestino, "Débito"));
         }
+//        TipoAcao acao = TipoAcao.TRANSFERENCIA;
+//        acao.efetuar(0, this, conta);
     }
 
-    private double calcularValorReal(double valor) {
+    public double calcularValor(double valor) {
         return tipoConta.equals(TipoConta.CORRENTE) ?
                 new Retirada().Calcular(valor, getTipoPessoa().getTxSacarTransferir()) : valor;
     }
 
-    boolean debitou(double valor) { return new Debito().debitar(this, valor); }
+    public boolean debitou(double valor) { return new Debito().debitar(this, valor); }
 
-    boolean movimentacao(Conta conta, double valor, double valorReal) {
+    public boolean movimentacao(Conta conta, double valor, double valorReal) {
         if (conta.equals(null) || !debitou(valorReal))
             return false;
         new Credito().creditar(conta, valor);

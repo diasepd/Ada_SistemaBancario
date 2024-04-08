@@ -9,12 +9,12 @@ public class ContaCorrente extends Conta {
     }
 
     public void investir(double valorReal) {
-//        TipoAcao acao = TipoAcao.INVESTIMENTO;
-//        acao.efetuar(getBanco(), getIdUsuario(), valorReal, "");
         ContaInvestimento conta = getBanco().getUsuario(getIdUsuario()).ChecaContaInvestimento();
         if (movimentacao(conta, valorReal, valorReal)) {
             conta.setAcao(new Acao(TipoAcao.INVESTIMENTO, valorReal, valorReal, getIdUsuario(), getIdUsuario(), "Crédito"));
             setAcao(new Acao(TipoAcao.INVESTIMENTO, valorReal, valorReal, getIdUsuario(), getIdUsuario(), "Débito"));
         }
+//        TipoAcao acao = TipoAcao.INVESTIMENTO;
+//        acao.efetuar(0, this);
     }
 }
