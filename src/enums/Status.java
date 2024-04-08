@@ -1,3 +1,6 @@
 package enums;
 
-public enum Status {ATIVO, INATIVO};
+public enum Status {
+    ATIVO,
+    INATIVO
+};

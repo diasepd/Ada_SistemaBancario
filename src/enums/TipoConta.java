@@ -1,3 +1,7 @@
 package enums;
 
-public enum TipoConta {CORRENTE, INVESTIMENTO, POUPANCA};
+public enum TipoConta {
+    CORRENTE,
+    INVESTIMENTO,
+    POUPANCA
+};

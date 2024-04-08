@@ -11,7 +11,9 @@ public enum TipoAcao {
 
     final Acao acao;
 
-    TipoAcao(Acao acao) { this.acao = acao; }
+    TipoAcao(Acao acao) {
+        this.acao = acao;
+    }
 
     public void efetuar(double valor, Conta... conta) {
         acao.realizar(valor, conta);

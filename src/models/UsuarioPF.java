@@ -9,6 +9,11 @@ public class UsuarioPF extends Usuario {
         setClassificacao(Classificacao.PF);
     }
 
-    public ContaPoupanca getContaPoupanca() {return contaPoupanca;}
-    public void setContaPoupanca(ContaPoupanca contaPoupanca) {this.contaPoupanca = contaPoupanca;}
+    public ContaPoupanca getContaPoupanca() {
+        return contaPoupanca;
+    }
+
+    public void setContaPoupanca(ContaPoupanca contaPoupanca) {
+        this.contaPoupanca = contaPoupanca;
+    }
 }

@@ -1,7 +1,4 @@
 package models;
-import auxiliares.Credito;
-import auxiliares.Debito;
-import auxiliares.Multiplicacao;
 import enums.Classificacao;
 import enums.Status;
 import enums.TipoConta;
@@ -26,7 +23,7 @@ public abstract class Conta {
         this.idUsuario = idUsuario;
         this.banco = banco;
         this.dataDeAtualizacao = new Date();
-        setRegistro(new Registro(TipoAcao.DEPOSITO, 0, 0, idUsuario, idUsuario, "Abertura da Conta"));
+        setRegistro(new Registro(TipoAcao.CONSULTA_SALDO, 0, 0, idUsuario, idUsuario, "Abertura da Conta"));
     }
 
     public void setRegistro(Registro registro){this.registroDeAcao.add(registro);}
@@ -47,27 +44,25 @@ public abstract class Conta {
     public TipoConta getTipoConta() {return tipoConta;}
     public void setTipoConta(TipoConta tipoConta) {this.tipoConta = tipoConta;}
     public Classificacao getTipoPessoa() {
-        if (tipoPessoa == null) setTipoPessoa(banco.getUsuario(getIdUsuario()).getClassificacao());
+        if (tipoPessoa == null)
+            setTipoPessoa(banco.getUsuario(getIdUsuario()).getClassificacao());
         return tipoPessoa;
     }
     public void setTipoPessoa(Classificacao tipoPessoa) {this.tipoPessoa = tipoPessoa;}
 
-    public void consultarSaldo() {TipoAcao.CONSULTA_SALDO.efetuar(saldo, this);}
-    public void depositar(double valor) {TipoAcao.DEPOSITO.efetuar(valor, this);}
-    public void sacar(double valor) {TipoAcao.SAQUE.efetuar(valor, this);}
-    public void transferir(double valor, String idDestino) {TipoAcao.TRANSFERENCIA.efetuar(valor, this,
-            getBanco().getUsuario(idDestino).getContaCorrente());}
-
-    public double calcularValor(double valor) {
-        return tipoConta.equals(TipoConta.CORRENTE) ?
-                new Multiplicacao().Calcular(valor, getTipoPessoa().getTxSacarTransferir()) : valor;
+    public void consultarSaldo() {
+        TipoAcao.CONSULTA_SALDO.efetuar(saldo, this);
     }
 
-    public boolean debitou(double valor) { return new Debito().debitar(this, valor); }
+    public void depositar(double valor) {
+        TipoAcao.DEPOSITO.efetuar(valor, this);
+    }
 
-    public boolean movimentacao(Conta conta, double valor, double valorReal) {
-        if (conta.equals(null) || !debitou(valorReal)) return false;
-        new Credito().creditar(conta, valor);
-        return true;
+    public void sacar(double valor) {
+        TipoAcao.SAQUE.efetuar(valor, this);
+    }
+
+    public void transferir(double valor, String terceiro) {
+        TipoAcao.TRANSFERENCIA.efetuar(valor, this,getBanco().getUsuario(terceiro).getContaCorrente());
     }
 }
