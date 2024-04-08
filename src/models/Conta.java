@@ -50,9 +50,7 @@ public abstract class Conta {
     }
     public void setTipoPessoa(Classificacao tipoPessoa) {this.tipoPessoa = tipoPessoa;}
 
-    public void consultarSaldo() {
-        TipoAcao.CONSULTA_SALDO.efetuar(saldo, this);
-    }
+    public void consultarSaldo() { TipoAcao.CONSULTA_SALDO.efetuar(saldo, this); }
 
     public void depositar(double valor) {
         TipoAcao.DEPOSITO.efetuar(valor, this);
