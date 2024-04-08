@@ -9,7 +9,6 @@ public class Deposito extends Operacao {
     public void realizar(double valor, Conta... conta) {
         historicoAcao = conta[0].getHistoricoDeAcao();
         idUsuario = conta[0].getIdUsuario();
-
         new Credito().creditar(conta[0], valor);
         historicoAcao.add(new Acao(TipoAcao.DEPOSITO, valor, valor, idUsuario, idUsuario, "Deposito"));
     }

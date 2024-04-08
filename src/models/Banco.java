@@ -7,8 +7,7 @@ public class Banco {
 
     public Usuario getUsuario(String idUsuario) {
         for (Usuario usuario : listaDeUsuario) {
-            if (usuario.getId() == idUsuario)
-                return usuario;
+            if (usuario.getId() == idUsuario) return usuario;
         }
         return null;
     }

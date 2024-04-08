@@ -9,8 +9,6 @@ public class Transferencia extends Operacao {
         historicoAcao = conta[0].getHistoricoDeAcao();
         idUsuario = conta[0].getIdUsuario();
         String idDestino = conta[1].getIdUsuario();
-        System.out.println(idDestino);
-
         double valorSolicitado = valor;
         valor = conta[0].calcularValor(valor);
         if (conta[0].movimentacao(conta[1], valorSolicitado, valor)) {

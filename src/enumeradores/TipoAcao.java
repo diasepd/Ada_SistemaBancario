@@ -11,9 +11,7 @@ public enum TipoAcao {
 
     final Operacao operacao;
 
-    TipoAcao(Operacao operacao) {
-        this.operacao = operacao;
-    }
+    TipoAcao(Operacao operacao) {this.operacao = operacao; }
 
     public void efetuar(double valor, Conta... conta) {
         operacao.realizar(valor, conta);

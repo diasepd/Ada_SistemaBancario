@@ -1,4 +1,3 @@
 package auxiliares;
 
-public class Retirada extends Multiplicacao{
-}
+public class Retirada extends Multiplicacao{}

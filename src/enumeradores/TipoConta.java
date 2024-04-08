@@ -1,7 +1,3 @@
 package enumeradores;
 
-public enum TipoConta {
-    CORRENTE,
-    INVESTIMENTO,
-    POUPANCA
-}
+public enum TipoConta {CORRENTE, INVESTIMENTO, POUPANCA}

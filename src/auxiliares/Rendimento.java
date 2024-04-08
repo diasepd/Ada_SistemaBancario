@@ -1,4 +1,3 @@
 package auxiliares;
 
-public class Rendimento extends Multiplicacao{
-}
+public class Rendimento extends Multiplicacao{}

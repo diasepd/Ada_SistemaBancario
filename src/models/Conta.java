@@ -52,21 +52,13 @@ public abstract class Conta {
     }
     public void setTipoPessoa(Classificacao tipoPessoa) {this.tipoPessoa = tipoPessoa;}
 
-    public void consultarSaldo() {efetuar(TipoAcao.CONSULTA_SALDO, saldo);}
-    public void depositar(double valor) {efetuar(TipoAcao.DEPOSITO, valor);}
-    public void sacar(double valor) {efetuar(TipoAcao.SAQUE, valor);}
-    private void efetuar (TipoAcao acao, double valor) {acao.efetuar(valor, this);}
+    public void consultarSaldo() {efetuar1(TipoAcao.CONSULTA_SALDO, saldo);}
+    public void depositar(double valor) {efetuar1(TipoAcao.DEPOSITO, valor);}
+    public void sacar(double valor) {efetuar1(TipoAcao.SAQUE, valor);}
     public void transferir(double valor, String idDestino) {
-        ContaCorrente conta = getBanco().getUsuario(idDestino).getContaCorrente();
-        double valorSolicitado = valor;
-        valor = calcularValor(valor);
-        if (movimentacao(conta, valorSolicitado, valor)) {
-            conta.setAcao(new Acao(TipoAcao.TRANSFERENCIA, valorSolicitado, valor, idUsuario, idDestino, "Crédito"));
-            historicoDeAcao.add(new Acao(TipoAcao.TRANSFERENCIA, valorSolicitado, valor, idUsuario, idDestino, "Débito"));
-        }
-//        TipoAcao acao = TipoAcao.TRANSFERENCIA;
-//        acao.efetuar(0, this, conta);
-    }
+        efetuar2(TipoAcao.TRANSFERENCIA, valor, getBanco().getUsuario(idDestino).getContaCorrente());}
+    private void efetuar1(TipoAcao acao, double valor) {acao.efetuar(valor, this);}
+    void efetuar2(TipoAcao acao, double valor, Conta contaDestino) {acao.efetuar(valor, this, contaDestino);}
 
     public double calcularValor(double valor) {
         return tipoConta.equals(TipoConta.CORRENTE) ?
@@ -76,8 +68,7 @@ public abstract class Conta {
     public boolean debitou(double valor) { return new Debito().debitar(this, valor); }
 
     public boolean movimentacao(Conta conta, double valor, double valorReal) {
-        if (conta.equals(null) || !debitou(valorReal))
-            return false;
+        if (conta.equals(null) || !debitou(valorReal)) return false;
         new Credito().creditar(conta, valor);
         return true;
     }
