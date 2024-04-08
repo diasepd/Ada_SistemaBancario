@@ -1,5 +1,5 @@
 package auxiliares;
-import model.Conta;
+import models.Conta;
 
 public class Credito {
     public void creditar(Conta conta, double valor) {

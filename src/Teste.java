@@ -1,5 +1,5 @@
-import model.Banco;
-import model.*;
+import models.Banco;
+import models.*;
 
 public class Teste {
     public static void main(String[] args) {

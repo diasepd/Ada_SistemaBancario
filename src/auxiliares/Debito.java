@@ -1,5 +1,5 @@
 package auxiliares;
-import model.Conta;
+import models.Conta;
 
 public class Debito {
     public boolean debitar(Conta conta, double valor) {
