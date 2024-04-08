@@ -9,6 +9,6 @@ public class ContaCorrente extends Conta {
     }
 
     public void investir(double valorReal) {
-        this.efetuar2(TipoAcao.TRANSFERENCIA, valorReal, getBanco().getUsuario(getIdUsuario()).ChecaContaInvestimento());
+        this.efetuar2(TipoAcao.INVESTIMENTO, valorReal, getBanco().getUsuario(getIdUsuario()).ChecaContaInvestimento());
     }
 }
