@@ -7,7 +7,8 @@ public enum TipoAcao {
     DEPOSITO(new Deposito()),
     TRANSFERENCIA(new Transferencia()),
     INVESTIMENTO(new Investimento()),
-    CONSULTA_SALDO(new ConsultaSaldo());
+    CONSULTA_SALDO(new ConsultaSaldo()),
+    RENDIMENTO(new Rendimento());
 
     final Acao acao;
 

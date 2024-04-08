@@ -1,6 +1,4 @@
 package models;
-import auxiliares.Credito;
-import auxiliares.Multiplicacao;
 import enums.TipoConta;
 import enums.TipoAcao;
 
@@ -10,9 +8,7 @@ public class ContaInvestimento extends Conta {
         setTipoConta(TipoConta.INVESTIMENTO);
     }
 
-    public void processarRendimento() {
-        double renda = new Multiplicacao().Calcular(getSaldo(), getTipoPessoa().getTxRendimentoMensal());
-        new Credito().creditar(this, renda);
-        setRegistro(new Registro(TipoAcao.DEPOSITO, renda, renda, getIdUsuario(), getIdUsuario(), "Renda"));
+    public void render() {
+        TipoAcao.RENDIMENTO.efetuar(getSaldo(), this);
     }
 } // O rendimento é gerado no início de cada mês

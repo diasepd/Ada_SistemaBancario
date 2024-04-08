@@ -42,8 +42,8 @@ public class Teste {
         usuario2.getContaInvestimento().consultarSaldo();                   //80
 
         System.out.println("Saldo após Rendimento");
-        usuario1.getContaInvestimento().processarRendimento();              //80.8
-        usuario2.getContaInvestimento().processarRendimento();              //81.6
+        usuario1.getContaInvestimento().render();              //80.8
+        usuario2.getContaInvestimento().render();              //81.6
         saldos(usuario1, usuario2);
 
         System.out.println("Historico das Movimentações");
