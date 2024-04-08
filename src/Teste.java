@@ -55,8 +55,8 @@ public class Teste {
     }
 
     private static void historiar (Conta conta) {
-        for (Acao acao : conta.getHistoricoDeAcao()) {
-            System.out.println(acao.toString());
+        for (Registro registro : conta.getRegistroDeAcao()) {
+            System.out.println(registro.toString());
         }
         System.out.println();
     }

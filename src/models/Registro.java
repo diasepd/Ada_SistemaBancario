@@ -1,8 +1,8 @@
 package models;
-import enumeradores.TipoAcao;
+import enums.TipoAcao;
 import java.util.Date;
 
-public class Acao {
+public class Registro {
     private Date data;
     private TipoAcao acao;
     private double valorPretendido;
@@ -11,8 +11,8 @@ public class Acao {
     private String idUsuarioDestino;
     private String observacao;
 
-    public Acao(TipoAcao acao, double valorPretendido, double valorReal, String idUsuarioOrigem,
-                String idUsuarioDestino, String observacao) {
+    public Registro(TipoAcao acao, double valorPretendido, double valorReal, String idUsuarioOrigem,
+                    String idUsuarioDestino, String observacao) {
         this.data = new Date();
         this.acao = acao;
         this.valorPretendido = valorPretendido;
@@ -32,14 +32,8 @@ public class Acao {
 
     @Override
     public String toString() {
-        return "HistoricoAcao{" +
-                "data=" + data +
-                ", tipo=" + acao +
-                ", valorPretendido=" + valorPretendido +
-                ", valorReal=" + valorReal +
-                ", idUsuarioOrigem='" + idUsuarioOrigem + '\'' +
-                ", idUsuarioDestino='" + idUsuarioDestino + '\'' +
-                ", observacao='" + observacao + '\'' +
-                '}';
+        return "HistoricoAcao{data="+data+", tipo="+acao+", valorPretendido="+valorPretendido+", valorReal="+valorReal+
+                ", idUsuarioOrigem='"+idUsuarioOrigem+'\''+", idUsuarioDestino='"+idUsuarioDestino +'\''+
+                ", observacao='" + observacao + '\'' +'}';
     }
 }

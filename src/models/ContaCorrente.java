@@ -1,6 +1,6 @@
 package models;
-import enumeradores.TipoConta;
-import enumeradores.TipoAcao;
+import enums.TipoConta;
+import enums.TipoAcao;
 
 public class ContaCorrente extends Conta {
     public ContaCorrente(long id, String idUsuario, Banco banco) {
@@ -8,7 +8,6 @@ public class ContaCorrente extends Conta {
         setTipoConta(TipoConta.CORRENTE);
     }
 
-    public void investir(double valorReal) {
-        this.efetuar2(TipoAcao.INVESTIMENTO, valorReal, getBanco().getUsuario(getIdUsuario()).ChecaContaInvestimento());
-    }
+    public void investir(double valor) {
+        TipoAcao.INVESTIMENTO.efetuar(valor, this, getBanco().getUsuario(getIdUsuario()).ChecaContaInvestimento()); }
 }

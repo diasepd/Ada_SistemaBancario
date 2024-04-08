@@ -1,4 +1,4 @@
-package enumeradores;
+package enums;
 
 public enum Classificacao {
     PF(0.01, 1.0),
@@ -12,16 +12,6 @@ public enum Classificacao {
         this.txSacarTransferir = txSacarTransferir;
     }
 
-    public double getTxRendimentoMensal() {
-        return txRendimentoMensal;
-    }
+    public double getTxRendimentoMensal() { return txRendimentoMensal; }
     public double getTxSacarTransferir() { return txSacarTransferir; }
-
-    @Override
-    public String toString() {
-        return "Classificacao{" +
-                "txRendimentoMensal=" + txRendimentoMensal +
-                ", txSacarTransferir=" + txSacarTransferir +
-                '}';
-    }
 }

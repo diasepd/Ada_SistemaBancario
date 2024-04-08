@@ -1,6 +1,6 @@
-package enumeradores;
+package enums;
 import models.Conta;
-import operacaos.*;
+import acoes.*;
 
 public enum TipoAcao {
     SAQUE(new Saque()),
@@ -9,11 +9,11 @@ public enum TipoAcao {
     INVESTIMENTO(new Investimento()),
     CONSULTA_SALDO(new ConsultaSaldo());
 
-    final Operacao operacao;
+    final Acao acao;
 
-    TipoAcao(Operacao operacao) {this.operacao = operacao; }
+    TipoAcao(Acao acao) { this.acao = acao; }
 
     public void efetuar(double valor, Conta... conta) {
-        operacao.realizar(valor, conta);
+        acao.realizar(valor, conta);
     }
 }

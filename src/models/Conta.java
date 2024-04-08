@@ -1,11 +1,11 @@
 package models;
 import auxiliares.Credito;
 import auxiliares.Debito;
-import auxiliares.Retirada;
-import enumeradores.Classificacao;
-import enumeradores.Status;
-import enumeradores.TipoConta;
-import enumeradores.TipoAcao;
+import auxiliares.Multiplicacao;
+import enums.Classificacao;
+import enums.Status;
+import enums.TipoConta;
+import enums.TipoAcao;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -16,7 +16,7 @@ public abstract class Conta {
     private Banco banco;
     private Date dataDeAtualizacao;
     private double saldo = 0;
-    private List<Acao> historicoDeAcao = new ArrayList<>();
+    private List<Registro> registroDeAcao = new ArrayList<>();
     private Status status = Status.ATIVO;
     private TipoConta tipoConta;
     private Classificacao tipoPessoa;
@@ -26,16 +26,16 @@ public abstract class Conta {
         this.idUsuario = idUsuario;
         this.banco = banco;
         this.dataDeAtualizacao = new Date();
-        setAcao(new Acao(TipoAcao.DEPOSITO, 0, 0, idUsuario, idUsuario, "Abertura da Conta"));
+        setRegistro(new Registro(TipoAcao.DEPOSITO, 0, 0, idUsuario, idUsuario, "Abertura da Conta"));
     }
 
-    public void setAcao(Acao acao){this.historicoDeAcao.add(acao);}
+    public void setRegistro(Registro registro){this.registroDeAcao.add(registro);}
     public long getId(){return id;}
     public void setId(long id){this.id = id;}
     public double getSaldo(){return saldo;}
     public void setSaldo(double saldo){this.saldo   = saldo;}
-    public List<Acao> getHistoricoDeAcao(){return historicoDeAcao;}
-    public void setHistoricoDeAcao(List<Acao> historicoDeAcao) {this.historicoDeAcao = historicoDeAcao;}
+    public List<Registro> getRegistroDeAcao(){return registroDeAcao;}
+    public void setRegistroDeAcao(List<Registro> registroDeAcao) {this.registroDeAcao = registroDeAcao;}
     public Date getDataDeAtualizacao(){return dataDeAtualizacao;}
     public void setDataDeAtualizacao(Date dataDeAtualizacao){this.dataDeAtualizacao = dataDeAtualizacao;}
     public Status getStatus(){return status;}
@@ -52,17 +52,15 @@ public abstract class Conta {
     }
     public void setTipoPessoa(Classificacao tipoPessoa) {this.tipoPessoa = tipoPessoa;}
 
-    public void consultarSaldo() {efetuar1(TipoAcao.CONSULTA_SALDO, saldo);}
-    public void depositar(double valor) {efetuar1(TipoAcao.DEPOSITO, valor);}
-    public void sacar(double valor) {efetuar1(TipoAcao.SAQUE, valor);}
-    public void transferir(double valor, String idDestino) {
-        efetuar2(TipoAcao.TRANSFERENCIA, valor, getBanco().getUsuario(idDestino).getContaCorrente());}
-    private void efetuar1(TipoAcao acao, double valor) {acao.efetuar(valor, this);}
-    void efetuar2(TipoAcao acao, double valor, Conta contaDestino) {acao.efetuar(valor, this, contaDestino);}
+    public void consultarSaldo() {TipoAcao.CONSULTA_SALDO.efetuar(saldo, this);}
+    public void depositar(double valor) {TipoAcao.DEPOSITO.efetuar(valor, this);}
+    public void sacar(double valor) {TipoAcao.SAQUE.efetuar(valor, this);}
+    public void transferir(double valor, String idDestino) {TipoAcao.TRANSFERENCIA.efetuar(valor, this,
+            getBanco().getUsuario(idDestino).getContaCorrente());}
 
     public double calcularValor(double valor) {
         return tipoConta.equals(TipoConta.CORRENTE) ?
-                new Retirada().Calcular(valor, getTipoPessoa().getTxSacarTransferir()) : valor;
+                new Multiplicacao().Calcular(valor, getTipoPessoa().getTxSacarTransferir()) : valor;
     }
 
     public boolean debitou(double valor) { return new Debito().debitar(this, valor); }

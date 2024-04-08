@@ -11,14 +11,8 @@ public class Banco {
         }
         return null;
     }
+
     public void setUsuario(Usuario usuario) {
         listaDeUsuario.add(usuario);
-    }
-
-    @Override
-    public String toString() {
-        return "Banco{" +
-                "usuarioArrayList=" + listaDeUsuario +
-                '}';
     }
 }

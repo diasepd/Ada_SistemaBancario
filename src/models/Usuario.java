@@ -1,6 +1,6 @@
 package models;
-import enumeradores.Classificacao;
-import enumeradores.Status;
+import enums.Classificacao;
+import enums.Status;
 import java.util.Date;
 
 public abstract class Usuario {
@@ -41,19 +41,5 @@ public abstract class Usuario {
     public ContaInvestimento ChecaContaInvestimento() {
         if (contaInvestimento == null) setContaInvestimento(new ContaInvestimento(2, id, banco));
         return getContaInvestimento();
-    }
-
-    @Override
-    public String toString() {
-        return "Usuario{" +
-                "id='" + id + '\'' +
-                ", classificacao=" + classificacao +
-                ", nome='" + nome + '\'' +
-                ", dataDeCadastro=" + dataDeCadastro +
-                ", status=" + status +
-                ", banco=" + banco +
-                ", contaCorrente=" + contaCorrente +
-                ", contaInvestimento=" + contaInvestimento +
-                '}';
     }
 }

@@ -1,5 +1,5 @@
 package models;
-import enumeradores.Classificacao;
+import enums.Classificacao;
 
 public class UsuarioPF extends Usuario {
     private ContaPoupanca contaPoupanca;
@@ -11,11 +11,4 @@ public class UsuarioPF extends Usuario {
 
     public ContaPoupanca getContaPoupanca() {return contaPoupanca;}
     public void setContaPoupanca(ContaPoupanca contaPoupanca) {this.contaPoupanca = contaPoupanca;}
-
-    @Override
-    public String toString() {
-        return "UsuarioPF{" +
-                "contaPoupanca=" + contaPoupanca +
-                '}';
-    }
 }
