@@ -1,6 +1,6 @@
 package acoes;
 import auxiliares.Credito;
-import enums_.TipoAcao;
+import enums.TipoAcao;
 import models.Conta;
 import models.Registro;
 

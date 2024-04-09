@@ -1,4 +1,4 @@
-package enums_;
+package enums;
 
 public enum TipoConta {
     CORRENTE,

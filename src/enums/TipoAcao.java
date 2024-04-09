@@ -1,4 +1,4 @@
-package enums_;
+package enums;
 import models.Conta;
 import acoes.*;
 

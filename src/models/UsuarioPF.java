@@ -1,5 +1,5 @@
 package models;
-import enums_.Classificacao;
+import enums.Classificacao;
 
 public class UsuarioPF extends Usuario {
     private ContaPoupanca contaPoupanca;

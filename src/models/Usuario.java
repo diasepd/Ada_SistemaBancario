@@ -1,6 +1,6 @@
 package models;
-import enums_.Classificacao;
-import enums_.Status;
+import enums.Classificacao;
+import enums.Status;
 import java.util.Date;
 
 public abstract class Usuario {
