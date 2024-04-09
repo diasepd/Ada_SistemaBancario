@@ -9,8 +9,9 @@ public class Saque extends Acao {
     public void realizar(double valor, Conta... conta) {
         double valorSolicitado = valor;
         valor = conta[0].getTipoPessoa().calcularRetirada(valor, conta[0].getTipoConta());
-        if (new Debito().debitar(conta[0], valor))
+        if (new Debito().debitar(conta[0], valor)) {
             idUsuario = conta[0].getIdUsuario();
             conta[0].setRegistro(new Registro(TipoAcao.SAQUE, valorSolicitado, valor, idUsuario, idUsuario, "Saque"));
+        }
     }
 }
