@@ -20,6 +20,7 @@ public abstract class Usuario {
         dataDeCadastro = new Date();
         status = Status.ATIVO;
         contaCorrente = new ContaCorrente(1, id, banco);
+        banco.setUsuario(this);
     }
 
     public String getId() {return id;}

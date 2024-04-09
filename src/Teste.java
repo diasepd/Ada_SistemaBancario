@@ -7,7 +7,9 @@ public class Teste {
         UsuarioPF usuario1 = new UsuarioPF("12345678911", "Eduardo Caldas Dias", banco);        //Conta corrente PF
         UsuarioPJ usuario2 = new UsuarioPJ("916962327910001", "Fábrica de brinquedos", banco);  // Conta corrente PJ
         banco.setUsuario(usuario1);
-        banco.setUsuario(usuario2);
+        for (Usuario usuario : banco.getListaDeUsuario()) {
+            System.out.println(usuario.toString());
+        }
         usuario1.setContaPoupanca(new ContaPoupanca(3, "12345678911", banco));                  //Conta poupança PF
 
         System.out.println("\nSaldo após DEPOSITO e INVESTIMENTO");
