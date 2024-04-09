@@ -61,6 +61,6 @@ public abstract class Conta {
     }
 
     public void transferir(double valor, String terceiro) {
-        TipoAcao.TRANSFERENCIA.efetuar(valor, this,getBanco().getUsuario(terceiro).getContaCorrente());
+        TipoAcao.TRANSFERENCIA.efetuar(valor, this, getBanco().getUsuario(terceiro).getContaCorrente());
     }
 }
