@@ -1,6 +1,6 @@
 package models;
-import enums.TipoConta;
-import enums.TipoAcao;
+import enums_.TipoConta;
+import enums_.TipoAcao;
 
 public class ContaCorrente extends Conta {
     public ContaCorrente(long id, String idUsuario, Banco banco) {

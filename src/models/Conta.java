@@ -1,8 +1,8 @@
 package models;
-import enums.Classificacao;
-import enums.Status;
-import enums.TipoConta;
-import enums.TipoAcao;
+import enums_.Classificacao;
+import enums_.Status;
+import enums_.TipoConta;
+import enums_.TipoAcao;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;

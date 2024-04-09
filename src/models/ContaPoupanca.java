@@ -1,5 +1,5 @@
 package models;
-import enums.TipoConta;
+import enums_.TipoConta;
 
 public class ContaPoupanca extends Conta {
     public ContaPoupanca(long id, String idUsuario, Banco banco) {

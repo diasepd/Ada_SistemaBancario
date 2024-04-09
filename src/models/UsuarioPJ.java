@@ -1,5 +1,5 @@
 package models;
-import enums.Classificacao;
+import enums_.Classificacao;
 
 public class UsuarioPJ extends Usuario {
     public UsuarioPJ(String id, String nome, Banco banco) {

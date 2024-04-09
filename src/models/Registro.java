@@ -1,5 +1,5 @@
 package models;
-import enums.TipoAcao;
+import enums_.TipoAcao;
 import java.util.Date;
 
 public class Registro {

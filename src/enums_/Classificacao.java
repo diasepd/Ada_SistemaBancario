@@ -1,4 +1,4 @@
-package enums;
+package enums_;
 
 import auxiliares.Multiplicacao;
 
