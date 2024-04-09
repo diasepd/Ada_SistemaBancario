@@ -1,5 +1,4 @@
 package enums;
-
 import auxiliares.Multiplicacao;
 
 public enum Classificacao {
@@ -19,7 +18,7 @@ public enum Classificacao {
     public double calcularRendimento(double valor) {
         return new Multiplicacao().Calcular(txRendimentoMensal, valor);
     }
-    public double calcularRetirada(double valor) {
-        return new Multiplicacao().Calcular(txSacarTransferir, valor);
+    public double calcularRetirada(double valor, TipoConta tipoConta) {
+        return new Multiplicacao().Calcular(tipoConta.equals(TipoConta.CORRENTE) ? txSacarTransferir : 1, valor);
     }
 }
