@@ -18,10 +18,6 @@ public abstract class Conta {
     private Status status = Status.ATIVO;
     private TipoConta tipoConta;
     private Classificacao tipoPessoa;
-    private ConsultaSaldo consultaSaldo = new ConsultaSaldo();
-    private Deposito deposito = new Deposito();
-    private Saque saque = new Saque();
-    private Transferencia transferencia = new Transferencia();
 
     public Conta(long id, String idUsuario, Banco banco) {
         this.id = id;
@@ -55,11 +51,11 @@ public abstract class Conta {
     }
     public void setTipoPessoa(Classificacao tipoPessoa) { this.tipoPessoa = tipoPessoa; }
 
-    // métodos ///////////////////////////////////////////////////////////////////////////
-    public void consultarSaldo() { consultaSaldo.realizar(saldo, this); }
-    public void depositar(double valor) { deposito.realizar(valor, this); }
-    public void sacar(double valor) { saque.realizar(valor, this); }
+    ////// métodos /////////////////////////////////////////////////////////////////////////////////////////////////////////
+    public void consultarSaldo() { new ConsultaSaldo().realizar(saldo, this); }
+    public void depositar(double valor) { new Deposito().realizar(valor, this); }
+    public void sacar(double valor) { new Saque().realizar(valor, this); }
     public void transferir(double valor, String terceiro) {
-        transferencia.realizar(valor, this, getBanco().getUsuario(terceiro).getContaCorrente());
+        new Transferencia().realizar(valor, this, getBanco().getUsuario(terceiro).getContaCorrente());
     }
 }

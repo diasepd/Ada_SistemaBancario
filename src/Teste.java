@@ -1,8 +1,13 @@
 import models.Banco;
 import models.*;
+import org.w3c.dom.ls.LSOutput;
+
+import java.sql.Time;
+import java.util.Scanner;
+import java.util.Timer;
 
 public class Teste {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
         Banco banco = new Banco();
         UsuarioPF usuario1 = new UsuarioPF("12345678911", "Eduardo Caldas Dias", banco);        //Conta corrente PF
         UsuarioPJ usuario2 = new UsuarioPJ("916962327910001", "Fábrica de brinquedos", banco);  // Conta corrente PJ
@@ -14,6 +19,7 @@ public class Teste {
 
         System.out.println("\nSaldo após DEPOSITO e INVESTIMENTO");
         usuario1.getContaCorrente().depositar(200);                          //100
+        Thread.sleep(2000);
         usuario2.getContaCorrente().depositar(200);                          //100
         usuario1.getContaPoupanca().depositar(100);                          //100
         usuario1.getContaCorrente().investir(100);                           //100
@@ -47,6 +53,7 @@ public class Teste {
         usuario1.getContaInvestimento().render();              //80.8
         usuario2.getContaInvestimento().render();              //81.6
         saldos(usuario1, usuario2);
+        System.out.println(usuario2.getContaInvestimento().getDataDeAtualizacao());
 
         System.out.println("Historico das Movimentações");
         historiar(usuario1.getContaCorrente());
