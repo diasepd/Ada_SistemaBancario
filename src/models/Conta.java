@@ -1,4 +1,5 @@
 package models;
+import acoes.*;
 import enums.Classificacao;
 import enums.Status;
 import enums.TipoConta;
@@ -17,6 +18,10 @@ public abstract class Conta {
     private Status status = Status.ATIVO;
     private TipoConta tipoConta;
     private Classificacao tipoPessoa;
+    private ConsultaSaldo consultaSaldo = new ConsultaSaldo();
+    private Deposito deposito = new Deposito();
+    private Saque saque = new Saque();
+    private Transferencia transferencia = new Transferencia();
 
     public Conta(long id, String idUsuario, Banco banco) {
         this.id = id;
@@ -26,41 +31,35 @@ public abstract class Conta {
         setRegistro(new Registro(TipoAcao.CONSULTA_SALDO, 0, 0, idUsuario, idUsuario, "Abertura da Conta"));
     }
 
-    public void setRegistro(Registro registro){this.registroDeAcao.add(registro);}
-    public long getId(){return id;}
-    public void setId(long id){this.id = id;}
-    public double getSaldo(){return saldo;}
-    public void setSaldo(double saldo){this.saldo   = saldo;}
-    public List<Registro> getRegistroDeAcao(){return registroDeAcao;}
-    public void setRegistroDeAcao(List<Registro> registroDeAcao) {this.registroDeAcao = registroDeAcao;}
-    public Date getDataDeAtualizacao(){return dataDeAtualizacao;}
-    public void setDataDeAtualizacao(Date dataDeAtualizacao){this.dataDeAtualizacao = dataDeAtualizacao;}
-    public Status getStatus(){return status;}
-    public void setStatus(Status status){this.status  = status;}
-    public String getIdUsuario(){return idUsuario;}
-    public void setIdUsuario(String idUsuario){this.idUsuario = idUsuario;}
-    public Banco getBanco() {return banco;}
-    public void setBanco(Banco banco) {this.banco = banco;}
-    public TipoConta getTipoConta() {return tipoConta;}
-    public void setTipoConta(TipoConta tipoConta) {this.tipoConta = tipoConta;}
+    public void setRegistro(Registro registro) { this.registroDeAcao.add(registro); }
+    public long getId() { return id; }
+    public void setId(long id) { this.id = id; }
+    public double getSaldo() { return saldo; }
+    public void setSaldo(double saldo) { this.saldo   = saldo; }
+    public List<Registro> getRegistroDeAcao() { return registroDeAcao; }
+    public void setRegistroDeAcao(List<Registro> registroDeAcao) { this.registroDeAcao = registroDeAcao; }
+    public Date getDataDeAtualizacao() { return dataDeAtualizacao; }
+    public void setDataDeAtualizacao(Date dataDeAtualizacao) { this.dataDeAtualizacao = dataDeAtualizacao; }
+    public Status getStatus() { return status; }
+    public void setStatus(Status status) { this.status  = status; }
+    public String getIdUsuario() { return idUsuario; }
+    public void setIdUsuario(String idUsuario) { this.idUsuario = idUsuario; }
+    public Banco getBanco() { return banco; }
+    public void setBanco(Banco banco) { this.banco = banco; }
+    public TipoConta getTipoConta() {return tipoConta; }
+    public void setTipoConta(TipoConta tipoConta) {this.tipoConta = tipoConta; }
     public Classificacao getTipoPessoa() {
         if (tipoPessoa == null)
             setTipoPessoa(banco.getUsuario(getIdUsuario()).getClassificacao());
         return tipoPessoa;
     }
-    public void setTipoPessoa(Classificacao tipoPessoa) {this.tipoPessoa = tipoPessoa;}
+    public void setTipoPessoa(Classificacao tipoPessoa) { this.tipoPessoa = tipoPessoa; }
 
-    public void consultarSaldo() { TipoAcao.CONSULTA_SALDO.efetuar(saldo, this); }
-
-    public void depositar(double valor) {
-        TipoAcao.DEPOSITO.efetuar(valor, this);
-    }
-
-    public void sacar(double valor) {
-        TipoAcao.SAQUE.efetuar(valor, this);
-    }
-
+    // métodos ///////////////////////////////////////////////////////////////////////////
+    public void consultarSaldo() { consultaSaldo.realizar(saldo, this); }
+    public void depositar(double valor) { deposito.realizar(valor, this); }
+    public void sacar(double valor) { saque.realizar(valor, this); }
     public void transferir(double valor, String terceiro) {
-        TipoAcao.TRANSFERENCIA.efetuar(valor, this, getBanco().getUsuario(terceiro).getContaCorrente());
+        transferencia.realizar(valor, this, getBanco().getUsuario(terceiro).getContaCorrente());
     }
 }

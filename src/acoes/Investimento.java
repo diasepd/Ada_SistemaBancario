@@ -4,7 +4,7 @@ import enums.TipoAcao;
 import models.Registro;
 import models.Conta;
 
-public class Investimento extends Acao {
+public class Investimento extends AcaoImpl {
     @Override
     public void realizar(double valor, Conta... conta) {
         if (new Movimentacao().movimentar(conta, valor, valor)) {

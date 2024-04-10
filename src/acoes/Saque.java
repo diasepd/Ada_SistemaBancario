@@ -4,7 +4,7 @@ import enums.TipoAcao;
 import models.Registro;
 import models.Conta;
 
-public class Saque extends Acao {
+public class Saque extends AcaoImpl {
     @Override
     public void realizar(double valor, Conta... conta) {
         double valorSolicitado = valor;

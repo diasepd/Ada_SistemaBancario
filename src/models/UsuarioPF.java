@@ -13,7 +13,5 @@ public class UsuarioPF extends Usuario {
         return contaPoupanca;
     }
 
-    public void setContaPoupanca(ContaPoupanca contaPoupanca) {
-        this.contaPoupanca = contaPoupanca;
-    }
+    public void setContaPoupanca(ContaPoupanca contaPoupanca) { this.contaPoupanca = contaPoupanca; }
 }

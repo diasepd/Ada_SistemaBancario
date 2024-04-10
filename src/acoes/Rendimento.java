@@ -4,7 +4,7 @@ import enums.TipoAcao;
 import models.Conta;
 import models.Registro;
 
-public class Rendimento extends Acao {
+public class Rendimento extends AcaoImpl {
     @Override
     public void realizar(double valor, Conta... conta) {
         double renda = conta[0].getTipoPessoa().calcularRendimento(valor);
